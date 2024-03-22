@@ -11,14 +11,18 @@ import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { Separator } from '../components';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase/config';
+import { Ionicons } from '@expo/vector-icons';
 
-const SigninScreen = () => {
+
+const SigninScreen = ({navigation}) => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [user] = useAuthState(auth);
   const signIn = async () => {
     console.log('button click')
   }
@@ -31,10 +35,10 @@ const SigninScreen = () => {
     />
     <Separator height={StatusBar.currentHeight} />
     <View style={styles.headerContainer}>
-    <FontAwesome5 name="person-booth" size={24} color="black" />
-      <Text style={styles.headerTitle}>Sign In</Text>
+    <Ionicons name="arrow-back-circle-sharp" size={24} color="black" />  
+          <Text style={styles.headerTitle}>Sign In</Text>
     </View>
-    <Text style={styles.title}>Welcome</Text>
+    <Text style={styles.title}>Welcome to </Text>
     <Text style={styles.content}>
       Enter your username and password, and enjoy ordering food
     </Text>
