@@ -11,6 +11,8 @@ import {
     TouchableOpacity,
   } from 'react-native';
 import { WelcomeCard,Separator } from '../components';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase/config';
 
 const pageStyle = isActive =>
   isActive
@@ -33,6 +35,7 @@ const Pagination = ({index}) => {
 
 
 const WelcomeScreen = ({navigation}) => {
+  const [user] = useAuthState(auth)
     const [welcomeListIndex, setWelcomeListIndex] = useState(0);
     const welcomeList = useRef();
     const onViewRef = useRef(({changed}) => {
@@ -87,7 +90,7 @@ const WelcomeScreen = ({navigation}) => {
             activeOpacity={0.8}
             style={{marginLeft: 10}}
             onPress={() => welcomeList.current.scrollToEnd()}>
-            <Text style={styles.buttonText}>SKIP</Text>
+            <Text style={styles.buttonText}>SKIP with {user?.email}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}

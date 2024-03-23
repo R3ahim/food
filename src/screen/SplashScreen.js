@@ -2,13 +2,17 @@ import { View, Text ,TextInput,StyleSheet,StatusBar,Image} from 'react-native'
 import React,{useEffect} from 'react'
 import { Colors,Fonts,Images } from '../contents';
 import {Display} from '../utils';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase/config';
 
 export default function SplashScreen({navigation}) {
+  const [user] = useAuthState(auth)
 useEffect(()=>{
     setTimeout(() => {
-        navigation.navigate('Welcome')
-        
-    }, 3000);
+      {
+        user?.email ?   navigation.navigate('Test'):  navigation.navigate('Welcome')
+      }        
+    }, 4000);
 })
   return (
     <View style={styles.container}>

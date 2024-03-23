@@ -30,6 +30,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
         try {
            const response= await createUserWithEmailAndPassword(auth,username, password);
             console.log(response,'User signed up successfully!');
+            navigation.navigate('Test')
           } catch (error) {
             console.error('Error signing up:', error);
           }
@@ -49,7 +50,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
       <Ionicons name="arrow-back-circle-sharp" size={24} color="black" />    
           <Text style={styles.headerTitle}>Sign In</Text>
       </View>
-      <Text style={styles.title}>Welcome to Signup {user.email}</Text>
+      <Text style={styles.title}>Welcome to Signup {user?.email}</Text>
       <Text style={styles.content}>
         Enter your username and password, and enjoy ordering food
       </Text>
